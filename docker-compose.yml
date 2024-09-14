@@ -116,132 +116,132 @@ services:
         ipv4_address: 172.20.0.12
     volumes:
       - redis:/data
-  payment:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        PORT: 9216
-        PLATFORM: payment
-    image: jeepay-payment:latest
-    hostname: payment
-    container_name: jeepay-payment
-    ports:
-      - "9216:9216"
-    depends_on:
-      - mysql
-      - redis
-      - activemq
-      # - rabbitmq
-      # - rocketmq-broker
-    networks:
-      jeepay:
-        ipv4_address: 172.20.0.21
-    volumes:
-      - ./logs/payment:/workspace/logs
-      - ./conf/payment/application.yml:/workspace/application.yml
-  manager:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        PORT: 9217
-        PLATFORM: manager
-    image: jeepay-manager:latest
-    hostname: manager
-    container_name: jeepay-manager
-    ports:
-      - "9217:9217"
-    depends_on:
-      - mysql
-      - redis
-      - activemq
-      # - rabbitmq
-      # - rocketmq-broker
-    networks:
-      jeepay:
-        ipv4_address: 172.20.0.22
-    volumes:
-      - ./logs/manager:/workspace/logs
-      - ./conf/manager/application.yml:/workspace/application.yml
-  merchant:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        PORT: 9218
-        PLATFORM: merchant
-    image: jeepay-merchant:latest
-    hostname: merchant
-    container_name: jeepay-merchant
-    ports:
-      - "9218:9218"
-    depends_on:
-      - mysql
-      - redis
-      - activemq
-      # - rabbitmq
-      # - rocketmq-broker
-    networks:
-      jeepay:
-        ipv4_address: 172.20.0.23
-    volumes:
-      - ./logs/merchant:/workspace/logs
-      - ./conf/merchant/application.yml:/workspace/application.yml
-  ui-payment:
-    build:
-      context: ${UI_BASE_DIR}/jeepay-ui
-      dockerfile: Dockerfile
-      args:
-        PLATFORM: cashier
-    image: jeepay-ui-payment:latest
-    hostname: payment-ui
-    container_name: jeepay-ui-payment
-    environment:
-      - BACKEND_HOST=172.20.0.21:9216
-    ports:
-      - "9226:80"
-    depends_on:
-      - payment
-    networks:
-      jeepay:
-        ipv4_address: 172.20.0.31
-  ui-manager:
-    build:
-      context: ${UI_BASE_DIR}/jeepay-ui
-      dockerfile: Dockerfile
-      args:
-        PLATFORM: manager
-    image: jeepay-ui-manager:latest
-    hostname: manager-ui
-    container_name: jeepay-ui-manager
-    environment:
-      - BACKEND_HOST=172.20.0.22:9217
-    ports:
-      - "9227:80"
-    depends_on:
-      - manager
-    networks:
-      jeepay:
-        ipv4_address: 172.20.0.32
-  ui-merchant:
-    build:
-      context: ${UI_BASE_DIR}/jeepay-ui
-      dockerfile: Dockerfile
-      args:
-        PLATFORM: merchant
-    image: jeepay-ui-merchant:latest
-    hostname: merchant-ui
-    container_name: jeepay-ui-merchant
-    environment:
-      - BACKEND_HOST=172.20.0.23:9218
-    ports:
-      - "9228:80"
-    depends_on:
-      - merchant
-    networks:
-      jeepay:
-        ipv4_address: 172.20.0.33
+#  payment:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      args:
+#        PORT: 9216
+#        PLATFORM: payment
+#    image: jeepay-payment:latest
+#    hostname: payment
+#    container_name: jeepay-payment
+#    ports:
+#      - "9216:9216"
+#    depends_on:
+#      - mysql
+#      - redis
+#      - activemq
+#      # - rabbitmq
+#      # - rocketmq-broker
+#    networks:
+#      jeepay:
+#        ipv4_address: 172.20.0.21
+#    volumes:
+#      - ./logs/payment:/workspace/logs
+#      - ./conf/payment/application.yml:/workspace/application.yml
+#  manager:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      args:
+#        PORT: 9217
+#        PLATFORM: manager
+#    image: jeepay-manager:latest
+#    hostname: manager
+#    container_name: jeepay-manager
+#    ports:
+#      - "9217:9217"
+#    depends_on:
+#      - mysql
+#      - redis
+#      - activemq
+#      # - rabbitmq
+#      # - rocketmq-broker
+#    networks:
+#      jeepay:
+#        ipv4_address: 172.20.0.22
+#    volumes:
+#      - ./logs/manager:/workspace/logs
+#      - ./conf/manager/application.yml:/workspace/application.yml
+#  merchant:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      args:
+#        PORT: 9218
+#        PLATFORM: merchant
+#    image: jeepay-merchant:latest
+#    hostname: merchant
+#    container_name: jeepay-merchant
+#    ports:
+#      - "9218:9218"
+#    depends_on:
+#      - mysql
+#      - redis
+#      - activemq
+#      # - rabbitmq
+#      # - rocketmq-broker
+#    networks:
+#      jeepay:
+#        ipv4_address: 172.20.0.23
+#    volumes:
+#      - ./logs/merchant:/workspace/logs
+#      - ./conf/merchant/application.yml:/workspace/application.yml
+#  ui-payment:
+#    build:
+#      context: ${UI_BASE_DIR}/jeepay-ui
+#      dockerfile: Dockerfile
+#      args:
+#        PLATFORM: cashier
+#    image: jeepay-ui-payment:latest
+#    hostname: payment-ui
+#    container_name: jeepay-ui-payment
+#    environment:
+#      - BACKEND_HOST=172.20.0.21:9216
+#    ports:
+#      - "9226:80"
+#    depends_on:
+#      - payment
+#    networks:
+#      jeepay:
+#        ipv4_address: 172.20.0.31
+#  ui-manager:
+#    build:
+#      context: ${UI_BASE_DIR}/jeepay-ui
+#      dockerfile: Dockerfile
+#      args:
+#        PLATFORM: manager
+#    image: jeepay-ui-manager:latest
+#    hostname: manager-ui
+#    container_name: jeepay-ui-manager
+#    environment:
+#      - BACKEND_HOST=172.20.0.22:9217
+#    ports:
+#      - "9227:80"
+#    depends_on:
+#      - manager
+#    networks:
+#      jeepay:
+#        ipv4_address: 172.20.0.32
+#  ui-merchant:
+#    build:
+#      context: ${UI_BASE_DIR}/jeepay-ui
+#      dockerfile: Dockerfile
+#      args:
+#        PLATFORM: merchant
+#    image: jeepay-ui-merchant:latest
+#    hostname: merchant-ui
+#    container_name: jeepay-ui-merchant
+#    environment:
+#      - BACKEND_HOST=172.20.0.23:9218
+#    ports:
+#      - "9228:80"
+#    depends_on:
+#      - merchant
+#    networks:
+#      jeepay:
+#        ipv4_address: 172.20.0.33
   # 如果你需要对外完整配置，可以使用下面的方式
   # https://www.digitalocean.com/community/tools/nginx?domains.0.server.domain=pay.test.com&domains.0.server.documentRoot=&domains.0.server.redirectSubdomains=false&domains.0.https.hsts=false&domains.0.https.hstsPreload=true&domains.0.php.php=false&domains.0.reverseProxy.reverseProxy=true&domains.0.reverseProxy.proxyPass=http%3A%2F%2F172.20.0.26%3A9226&domains.0.routing.index=index.html&domains.0.routing.fallbackHtml=true&domains.0.routing.fallbackPhp=false&domains.0.logging.accessLog=true&domains.0.logging.errorLog=true&global.reverseProxy.proxyCoexistenceXForwarded=remove&global.app.lang=zhCN
   # 访问并配置好所有域名和代理，下载文件放到项目根目录下取名叫做 nginx.tar.gz
